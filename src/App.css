@@ -240,44 +240,48 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  padding-top: 80px; /* Make room for timer */
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 /* Center Timer Display */
 .center-timer {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  z-index: 1000;
   background: linear-gradient(135deg, rgba(255, 69, 0, 0.95) 0%, rgba(255, 140, 0, 0.95) 100%);
   color: white;
-  padding: 1.2rem 2.5rem;
-  border-radius: 24px;
+  padding: 0.8rem 1.5rem;
+  border-radius: 20px;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   box-shadow: 0 8px 32px rgba(255, 69, 0, 0.4);
-  z-index: 100;
   backdrop-filter: blur(20px);
   border: 2px solid rgba(255, 255, 255, 0.3);
   text-align: center;
-  min-width: 120px;
+  min-width: 100px;
 }
 
 .round-time {
-  font-size: 2.5rem;
+  font-size: clamp(1rem, 2.5vmin, 1.3rem);
   color: white;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   letter-spacing: 0.05em;
+  font-weight: bold;
 }
 
 .game-grid {
   display: grid;
-  gap: 0.8rem;
-  width: min(90vw, 90vh);
-  height: min(90vw, 90vh);
+  gap: clamp(0.4rem, 1.5vmin, 0.8rem);
+  width: min(90vw, 85vh);
+  height: min(90vw, 85vh);
   max-width: 600px;
   max-height: 600px;
   aspect-ratio: 1;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 /* Card flip animation */
@@ -733,5 +737,60 @@
   
   .game-description {
     max-width: 600px;
+  }
+}
+
+/* Landscape mode optimizations */
+@media (orientation: landscape) {
+  .game-grid {
+    width: min(85vw, 80vh);
+    height: min(85vw, 80vh);
+  }
+  
+  .center-timer {
+    top: 15px;
+    right: 25px;
+    padding: 0.6rem 1.2rem;
+    font-size: clamp(0.9rem, 2vmin, 1.2rem);
+  }
+  
+  .progress-bar-container {
+    bottom: 15px;
+    left: 25px;
+    right: 25px;
+  }
+  
+  .game-screen {
+    padding: 0.5rem 1rem;
+  }
+  
+  .cover-screen {
+    padding: clamp(1rem, 2vh, 2rem) clamp(2rem, 4vw, 4rem);
+  }
+  
+  .lab-header {
+    margin-bottom: clamp(1rem, 2vh, 2rem);
+  }
+  
+  .game-description {
+    max-width: min(80vw, 600px);
+  }
+}
+
+/* Portrait mode optimizations */
+@media (orientation: portrait) {
+  .game-grid {
+    width: min(90vw, 75vh);
+    height: min(90vw, 75vh);
+  }
+  
+  .center-timer {
+    top: 10px;
+    right: 20px;
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .cover-screen {
+    padding: clamp(1rem, 3vh, 3rem) clamp(1rem, 3vw, 2rem);
   }
 }
